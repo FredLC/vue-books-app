@@ -34,8 +34,12 @@
                 <template slot-scope="{ result: { data, loading }, isLoading }">
                     <div v-if="isLoading">Loading...</div>
                     <div v-else>
-                        <div href="#" v-for="book of data.books" :key="book.id">
-                            {{ book.id }}. {{ book.title }}
+                        <div v-for="book of data.books" :key="book.id">
+                            <router-link :to="`/books/${book.id}`">
+                                {{ book.id }}. {{ book.title }}
+                            </router-link>
+                            <div>{{ book.author }}</div>
+                            <img :src="book.image" alt="book cover" />
                         </div>
                     </div>
                 </template>
@@ -47,12 +51,12 @@
                 <template slot-scope="{ result: { data, loading }, isLoading }">
                     <div v-if="isLoading">Loading...</div>
                     <div v-else>
-                        <div
-                            href="#"
-                            v-for="book of data.booksFeatured"
-                            :key="book.id"
-                        >
-                            {{ book.id }}. {{ book.title }}
+                        <div v-for="book of data.booksFeatured" :key="book.id">
+                            <router-link :to="`/books/${book.id}`">
+                                {{ book.id }}. {{ book.title }}
+                            </router-link>
+                            <div>{{ book.author }}</div>
+                            <img :src="book.image" alt="book cover" />
                         </div>
                     </div>
                 </template>
@@ -62,15 +66,14 @@
         <div v-else>
             <ApolloQuery :query="query" :variables="{ id: selectedCategory }">
                 <template slot-scope="{ result: { data, loading }, isLoading }">
-                    <!-- Some content -->
                     <div v-if="isLoading">Loading...</div>
                     <div v-else>
-                        <div
-                            href="#"
-                            v-for="book of data.category.books"
-                            :key="book.id"
-                        >
-                            {{ book.id }}. {{ book.title }}
+                        <div v-for="book of data.category.books" :key="book.id">
+                            <router-link :to="`/books/${book.id}`">
+                                {{ book.id }}. {{ book.title }}
+                            </router-link>
+                            <div>{{ book.author }}</div>
+                            <img :src="book.image" alt="book cover" />
                         </div>
                     </div>
                 </template>
